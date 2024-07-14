@@ -36,6 +36,10 @@ module.exports = {
 
 ## Only test specific file
 
+```
+yarn test tests/testhub.test.ts
+```
+
 # Issue met if only install @types/jest and ts-jest （need to config jest.config.js）
 
 ```
