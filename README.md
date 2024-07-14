@@ -3,7 +3,9 @@
 ## reference
 
 https://jestjs.io/docs/getting-started#using-typescript
+
 https://jestjs.io/docs/getting-started#via-ts-jest
+
 https://jestjs.io/docs/getting-started#type-definitions
 
 ## Install Jest
