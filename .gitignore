@@ -1,0 +1,46 @@
+## --------------------------------------------Code related files--------------------------------------------
+# Secret 
+## dotenv environment variables file
+.env
+.env.test
+.env.production
+
+# Node.js related files
+## Dependency directories
+/node_modules/
+
+# TypeScript compiled files
+/**/*.js
+/**/*.js.map
+
+# Build artifacts
+/dist/
+/out/
+/build/
+/lib/
+
+# Logs and temp files
+logs
+*.log
+*.tmp
+*.swp
+.nyc_output/
+coverage/
+tmp/
+target/
+
+
+
+## --------------------------------------------Development Tools--------------------------------------------
+# OS specific
+## MacOS
+Thumbs.db
+.DS_Store
+
+# IDEs & Editors & OS
+## JetBrains IDE files
+.idea/
+## VS Code files
+.vscode/
+.vscode-test/
+*.code-workspace
