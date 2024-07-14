@@ -1,103 +1,92 @@
-# Project setup
+# Ts Config
 
-## Step1 init a new Node.js project
+## reference
 
-```
-npm init --yes
-```
+https://jestjs.io/docs/getting-started#using-typescript
+https://jestjs.io/docs/getting-started#via-ts-jest
+https://jestjs.io/docs/getting-started#type-definitions
 
-## Step2 install ts dependency
-
-```
-npm i -D typescript ts-node
-```
-
-## Step3 Setup tsconfig
-
-way1 `./node_modules/.bin/tsc --init`
+## Install Jest
 
 ```
-./node_modules/.bin/tsc --init
-
-Created a new tsconfig.json with:
-                                                                                                                     TS
-  target: es2016
-  module: commonjs
-  strict: true
-  esModuleInterop: true
-  skipLibCheck: true
-  forceConsistentCasingInFileNames: true
+npm install --save-dev  ts-jest @types/jest
 ```
 
-way2 `npx tsc --init`
+Explain :
+choose to install the @types/jest package. It provides types for Jest globals without a need to import them.
+
+## Config jest.config.js
 
 ```
-npx tsc --init
-
-Created a new tsconfig.json with:
-                                                                                                                     TS
-  target: es2016
-  module: commonjs
-  strict: true
-  esModuleInterop: true
-  skipLibCheck: true
-  forceConsistentCasingInFileNames: true
-
-
-You can learn more at https://aka.ms/tsconfig
+yarn ts-jest config:init
 
 ```
 
-## Step4 Compile the TypeScript Code
+modify the file content
 
 ```
-npx tsc
+module.exports = {
+  preset: 'ts-jest', /* this fix the issue that cant run `yarn test` after install ts-jest and @types/jest */
+  testEnvironment: 'node',
+  roots: ['<rootDir>/tests'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!**/node_modules/**'],
+};
 
 ```
 
-## [Optional] Step4 Run the ts directly without compile
+## Only test specific file
 
-way 1 run a TypeScript file directly using Node.js, without having to compile the TypeScript to JavaScript first
-
-```
-node --loader ts-node/esm src/index.ts
-
-(node:40294) ExperimentalWarning: Custom ESM Loaders is an experimental feature and might change at any time
-(Use `node --trace-warnings ...` to show where the warning was created)
-Hello, TypeScript!
-```
-
-## Step5 Run the ts file
+# Issue met if only install @types/jest and ts-jest （need to config jest.config.js）
 
 ```
-node build/index.js
+yarn test
+
+yarn run v1.22.21
+warning ../../../../../package.json: No license field
+$ jest
+ FAIL  tests/testhub.test.ts
+  ● Test suite failed to run
+
+    Jest encountered an unexpected token
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see https://jestjs.io/docs/ecmascript-modules for how to enable it.
+     • If you are trying to use TypeScript, see https://jestjs.io/docs/getting-started#using-typescript
+     • To have some of your "node_modules" files transformed, you can specify a custom "transformIgnorePatterns" in your config.
+     • If you need a custom transformation specify a "transform" option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the "moduleNameMapper" config option.
+
+    You'll find more details and examples of these config options in the docs:
+    https://jestjs.io/docs/configuration
+    For information about custom transformations, see:
+    https://jestjs.io/docs/code-transformation
+
+    Details:
+
+    /Users/huan/Documents/code/series-code-example-simple/ts/ts-project-unit-test/tests/testhub.test.ts:1
+    ({"Object.<anonymous>":function(module,exports,require,__dirname,__filename,jest){import { expect } from '@jest/globals';
+                                                                                      ^^^^^^
+
+    SyntaxError: Cannot use import statement outside a module
+
+      at Runtime.createScriptFromCode (node_modules/jest-runtime/build/index.js:1505:14)
+
+----------|---------|----------|---------|---------|-------------------
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+----------|---------|----------|---------|---------|-------------------
+All files |       0 |        0 |       0 |       0 |
+----------|---------|----------|---------|---------|-------------------
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        0.451 s
+Ran all test suites.
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 ```
-
-## Questions
-
-Q1: Placing TypeScript under the devDependencies section rather than dependencies ?
-
-```
-Placing TypeScript under the devDependencies section rather than dependencies is common practice for several reasons:
-
-Development Tool: TypeScript is a superset of JavaScript that provides optional static typing and other features. It's primarily used during development to catch type errors at compile time, which doesn't affect the runtime behavior of your application. Since the compiled JavaScript files (which lack TypeScript annotations) are what actually run in production, TypeScript itself isn't a runtime dependency.
-
-Not Required at Runtime: The end product of a TypeScript project is usually JavaScript, which means that TypeScript isn't needed when the application is running in production. Therefore, it doesn't need to be included in the dependencies section, which is meant for packages that are required for the application to function at runtime.
-
-Separation of Concerns: Keeping development tools like TypeScript separate from production dependencies helps maintain a clear distinction between what's needed for development and what's necessary for deployment. This can simplify the management of dependencies and reduce the size of the final package that gets deployed.
-
-Avoiding Unnecessary Overhead: Including TypeScript in dependencies would mean that any system running your application would have to install TypeScript, even if it's not needed. This could increase the initial setup time and resource usage unnecessarily.
-
-In summary, TypeScript is typically placed under devDependencies because it's a tool for developers, not a requirement for the application's runtime environment.
-```
-
-Q2: ts-node VS ts-node-dev
-
-```
-ts-node-dev is another package often used alongside TypeScript projects in Node.js. Here's what it is and how it differs from ts-node:
-
-ts-node-dev: This is an extension of ts-node that includes development features such as hot reloading, which means your application will restart automatically whenever you make changes to your TypeScript source code. It's particularly useful during the development phase as it saves time by not requiring manual restarts of the server.
-When you see ts-node-dev in a project, it typically indicates that the developers are leveraging its development-time conveniences for their TypeScript applications. The command to start the application might look something like:
-```
-
-Q3: What is the most popular .gitignore file for typescript ?
