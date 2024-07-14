@@ -1,10 +1,18 @@
-Project setup
+# Project setup
+
+Step1 init a new Node.js project
+
+```
+npm init --yes
+```
 
 Step2 install ts dependency
 
 ```
 npm i -D typescript ts-node
 ```
+
+## Questions
 
 Q1: Placing TypeScript under the devDependencies section rather than dependencies ?
 
