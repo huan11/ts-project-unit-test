@@ -1,18 +1,18 @@
 # Project setup
 
-Step1 init a new Node.js project
+## Step1 init a new Node.js project
 
 ```
 npm init --yes
 ```
 
-Step2 install ts dependency
+## Step2 install ts dependency
 
 ```
 npm i -D typescript ts-node
 ```
 
-Step3 Setup tsconfig
+## Step3 Setup tsconfig
 
 way1 `./node_modules/.bin/tsc --init`
 
@@ -46,6 +46,31 @@ Created a new tsconfig.json with:
 
 You can learn more at https://aka.ms/tsconfig
 
+```
+
+## Step4 Compile the TypeScript Code
+
+```
+npx tsc
+
+```
+
+## [Optional] Step4 Run the ts directly without compile
+
+way 1 run a TypeScript file directly using Node.js, without having to compile the TypeScript to JavaScript first
+
+```
+node --loader ts-node/esm src/index.ts
+
+(node:40294) ExperimentalWarning: Custom ESM Loaders is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Hello, TypeScript!
+```
+
+## Step5 Run the ts file
+
+```
+node build/index.js
 ```
 
 ## Questions
