@@ -12,6 +12,42 @@ Step2 install ts dependency
 npm i -D typescript ts-node
 ```
 
+Step3 Setup tsconfig
+
+way1 `./node_modules/.bin/tsc --init`
+
+```
+./node_modules/.bin/tsc --init
+
+Created a new tsconfig.json with:
+                                                                                                                     TS
+  target: es2016
+  module: commonjs
+  strict: true
+  esModuleInterop: true
+  skipLibCheck: true
+  forceConsistentCasingInFileNames: true
+```
+
+way2 `npx tsc --init`
+
+```
+npx tsc --init
+
+Created a new tsconfig.json with:
+                                                                                                                     TS
+  target: es2016
+  module: commonjs
+  strict: true
+  esModuleInterop: true
+  skipLibCheck: true
+  forceConsistentCasingInFileNames: true
+
+
+You can learn more at https://aka.ms/tsconfig
+
+```
+
 ## Questions
 
 Q1: Placing TypeScript under the devDependencies section rather than dependencies ?
